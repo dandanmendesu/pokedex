@@ -1,0 +1,22 @@
+/* rootを画面幅いっぱいにし、内部コンテンツは最大幅で中央寄せにする */
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  /* 上の余白を削除（navの上のスペースをなくす） */
+  padding: 0 0 1rem 0;
+  text-align: center;
+  background-color: #7f9ebd;
+  box-sizing: border-box;
+}
+
+/* カードコンテナは最大幅を持たせて中央に表示（左右余白を解消） */
+.pokemonCardContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 1280px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
