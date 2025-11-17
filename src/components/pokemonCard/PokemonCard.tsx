@@ -1,3 +1,4 @@
+import { PokemonCardProps } from "../../type/componentpropstype";
 import "./card.css";
 
 /*
@@ -5,16 +6,19 @@ import "./card.css";
   @Param pokemon: ポケモン1体分の詳細データ
   @Return ポケモンカードコンポーネント
 */
-const PokemonCard = ({ pokemon }) => {
+const PokemonCard = ({ pokemonType: pokemonData }: PokemonCardProps) => {
   return (
     <div className="card">
       <div className="cardImg">
-        <img src={pokemon?.sprites?.front_default} alt={pokemon?.name} />
+        <img
+          src={pokemonData?.sprites?.front_default ?? undefined}
+          alt={pokemonData?.name}
+        />
       </div>
-      <h3 className="cardName">{pokemon?.name}</h3>
+      <h3 className="cardName">{pokemonData?.name}</h3>
       <div className="cardTypes">
         <div>タイプ</div>
-        {pokemon?.types?.map((type) => {
+        {pokemonData?.types?.map((type) => {
           return (
             <div key={type.slot}>
               <span className="typeName">{type.type.name}</span>
@@ -24,13 +28,15 @@ const PokemonCard = ({ pokemon }) => {
       </div>
       <div className="cardInfo">
         <div className="cardData">
-          <p className="title">重さ: {pokemon?.weight}</p>
+          <p className="title">重さ: {pokemonData?.weight}</p>
         </div>
         <div className="cardData">
-          <p className="title">高さ: {pokemon?.height}</p>
+          <p className="title">高さ: {pokemonData?.height}</p>
         </div>
         <div className="cardData">
-          <p className="title">技: {pokemon?.abilities[0]?.ability?.name}</p>
+          <p className="title">
+            技: {pokemonData?.abilities[0]?.ability?.name}
+          </p>
         </div>
       </div>
     </div>
