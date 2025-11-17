@@ -1,6 +1,10 @@
 /*Propsの型定義をするファイル*/
 
-import { AllPokemonDataType, PokemonType } from "./pokemonType";
+import type {
+  AllPokemonDataType,
+  jpEnNameProperty,
+  PokemonType,
+} from "./pokemonType.js";
 
 /*
 ポケモンデータ全件を取得するutils「getAllPokemon」のPropsの型定義
@@ -31,4 +35,14 @@ export type LoadPokemonProps = {
 */
 export type GetPokemonProps = {
   url: string;
+};
+
+/*
+  ポケモン名・タイプ名・特性名を日本語に翻訳するutils「translateToJapanese」のPropsの型定義
+  @Param englishName: 英語名
+  @Param category: 翻訳するカテゴリ (ポケモン名・タイプ名・特性名)
+*/
+export type TranslateToJapaneseProps = {
+  englishName: string;
+  category?: jpEnNameProperty;
 };

@@ -1,4 +1,5 @@
 /*ポケモンデータの型定義をするファイル*/
+import { CONSTANTS } from "../const/appConst.js";
 
 //https://pokeapi.co/api/v2/pokemonから取得できる全件データの型定義
 export type AllPokemonDataType = {
@@ -311,3 +312,22 @@ export type PokemonType = {
 
   weight: number;
 };
+
+export type JpEnNameType = {
+  englishName: string;
+  japaneseName: string;
+};
+
+//JSON ファイルの型定義
+export type JpEnNameDataType = {
+  pokemonNames: Record<string, string>;
+  typeNames: Record<string, string>;
+  abilityNames: Record<string, string>;
+};
+
+//jpEnNameのプロパティ名の型定義
+export type jpEnNameProperty =
+  | typeof CONSTANTS.JSONPROPERTIES.POKEMON_NAME //pokemonNames
+  | typeof CONSTANTS.JSONPROPERTIES.TYPE_NAME //typeNames
+  | typeof CONSTANTS.JSONPROPERTIES.ABILITY_NAME //abilityNames
+  | typeof CONSTANTS.JSONPROPERTIES.SKILL_NAME; //skillNames

@@ -1,13 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 
-import { getAllPokemon, loadPokemon } from "./utils/pokemon";
-import { CONSTANTS } from "./const/appConst";
-import PokemonCard from "./components/pokemonCard/PokemonCard";
-import Navbar from "./components/navbar/Navbar";
-import PageLoadButton from "./components/pageButton/PageLoadButton";
-import { AllPokemonDataType, PokemonType } from "./type/pokemonType";
-import { GetAllPokemonProps } from "./type/utilpropsType";
+import { getAllPokemon, loadPokemon } from "./utils/pokemon.js";
+import { CONSTANTS } from "./const/appConst.js";
+import PokemonCard from "./components/pokemonCard/PokemonCard.js";
+import Navbar from "./components/navbar/Navbar.js";
+import PageLoadButton from "./components/pageButton/PageLoadButton.js";
+import type { AllPokemonDataType, PokemonType } from "./type/pokemonType.js";
 
 export const App = () => {
   const [loading, setLoading] = useState(true);
