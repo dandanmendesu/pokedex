@@ -1,3 +1,8 @@
+import {
+  HandlePageLoadButtonProps,
+  IsAvailableProps,
+  PageLoadButtonProps,
+} from "../../type/componentpropstype";
 import { loadPokemon, getAllPokemon } from "../../utils/pokemon";
 import "./PageLoadButton.css";
 
@@ -14,17 +19,25 @@ const PageLoadButton = ({
   setLoading,
   allPokemonDataRef,
   setPokemonData,
-}) => {
+}: PageLoadButtonProps) => {
   return (
     <div className="pageLoadButton">
       <button
-        disabled={isAvailable(isPrev, allPokemonDataRef)}
+        disabled={isAvailable({ isPrev, allPokemonDataRef })}
         onClick={
           isPrev === true
             ? () =>
-                handlePrevPage(setLoading, allPokemonDataRef, setPokemonData)
+                handlePrevPage({
+                  setLoading,
+                  allPokemonDataRef,
+                  setPokemonData,
+                })
             : () =>
-                handleNextPage(setLoading, allPokemonDataRef, setPokemonData)
+                handleNextPage({
+                  setLoading,
+                  allPokemonDataRef,
+                  setPokemonData,
+                })
         }
       >
         {isPrev === true ? "前へ" : "次へ"}
@@ -40,21 +53,29 @@ const PageLoadButton = ({
   @Param setPokemonData: ポケモンデータを設定する関数
   @Return なし
 */
-const handlePrevPage = async (
+const handlePrevPage = async ({
   setLoading,
   allPokemonDataRef,
-  setPokemonData
-) => {
-  console.log("前へボタンがクリックされました");
-  console.log(allPokemonDataRef);
-  if (!allPokemonDataRef.current.previous) return;
-  setLoading(true);
-  const data = await getAllPokemon(
-    allPokemonDataRef.current.previous,
-    allPokemonDataRef
-  );
-  await loadPokemon(data.results, setPokemonData);
-  setLoading(false);
+  setPokemonData,
+}: HandlePageLoadButtonProps) => {
+  try {
+    console.log("前へボタンがクリックされました");
+    console.log(allPokemonDataRef);
+    if (!allPokemonDataRef.current?.previous) return;
+    setLoading(true);
+    const data = await getAllPokemon({
+      url: allPokemonDataRef.current.previous,
+      allPokemonDataRef: allPokemonDataRef,
+    });
+    await loadPokemon({
+      pokemonData: data.results,
+      setPokemonData: setPokemonData,
+    });
+    setLoading(false);
+  } catch (error) {
+    console.error("Error loading previous page:", error);
+    setLoading(false);
+  }
 };
 
 /*
@@ -64,21 +85,29 @@ const handlePrevPage = async (
   @Param setPokemonData: ポケモンデータを設定する関数
   @Return なし
 */
-const handleNextPage = async (
+const handleNextPage = async ({
   setLoading,
   allPokemonDataRef,
-  setPokemonData
-) => {
-  console.log("次へボタンがクリックされました");
-  console.log(allPokemonDataRef.current);
-  if (!allPokemonDataRef.current.next) return;
-  setLoading(true);
-  const data = await getAllPokemon(
-    allPokemonDataRef.current.next,
-    allPokemonDataRef
-  );
-  await loadPokemon(data.results, setPokemonData);
-  setLoading(false);
+  setPokemonData,
+}: HandlePageLoadButtonProps) => {
+  try {
+    console.log("次へボタンがクリックされました");
+    console.log(allPokemonDataRef.current);
+    if (!allPokemonDataRef.current?.next) return;
+    setLoading(true);
+    const data = await getAllPokemon({
+      url: allPokemonDataRef.current.next,
+      allPokemonDataRef: allPokemonDataRef,
+    });
+    await loadPokemon({
+      pokemonData: data.results,
+      setPokemonData: setPokemonData,
+    });
+    setLoading(false);
+  } catch (error) {
+    console.error("Error loading next page:", error);
+    setLoading(false);
+  }
 };
 
 /*
@@ -87,7 +116,7 @@ const handleNextPage = async (
   @Param allPokemonDataRef: すべてのポケモンデータを保持するref
   @Return ボタンが無効ならtrue、有効ならfalse
 */
-const isAvailable = (isPrev, allPokemonDataRef) => {
+const isAvailable = ({ isPrev, allPokemonDataRef }: IsAvailableProps) => {
   if (isPrev) {
     return allPokemonDataRef.current?.previous ? false : true;
   } else {
