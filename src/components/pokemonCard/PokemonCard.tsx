@@ -1,5 +1,9 @@
-import { PokemonCardProps } from "../../type/componentpropstype";
+import type { PokemonCardProps } from "../../type/componentpropstype.js";
+import { translateToJapanese } from "../../utils/pokemon.js";
 import "./card.css";
+
+import type { PokemonType } from "../../type/pokemonType.js";
+import { CONSTANTS } from "../../const/appConst.js";
 
 /*
   ポケモンカードコンポーネント
@@ -15,13 +19,23 @@ const PokemonCard = ({ pokemonType: pokemonData }: PokemonCardProps) => {
           alt={pokemonData?.name}
         />
       </div>
-      <h3 className="cardName">{pokemonData?.name}</h3>
+      <h3 className="cardName">
+        {translateToJapanese({
+          englishName: pokemonData?.name,
+          category: CONSTANTS.JSONPROPERTIES.POKEMON_NAME,
+        })}
+      </h3>
       <div className="cardTypes">
         <div>タイプ</div>
-        {pokemonData?.types?.map((type) => {
+        {pokemonData?.types?.map((type: PokemonType["types"][0]) => {
           return (
             <div key={type.slot}>
-              <span className="typeName">{type.type.name}</span>
+              <span className="typeName">
+                {translateToJapanese({
+                  englishName: type.type.name,
+                  category: CONSTANTS.JSONPROPERTIES.TYPE_NAME,
+                })}
+              </span>
             </div>
           );
         })}
@@ -35,7 +49,11 @@ const PokemonCard = ({ pokemonType: pokemonData }: PokemonCardProps) => {
         </div>
         <div className="cardData">
           <p className="title">
-            技: {pokemonData?.abilities[0]?.ability?.name}
+            特性:{" "}
+            {translateToJapanese({
+              englishName: pokemonData?.abilities[0]?.ability?.name ?? "",
+              category: CONSTANTS.JSONPROPERTIES.ABILITY_NAME,
+            })}
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 //コンポーネントのpropsの型定義
 
-import { AllPokemonDataType, PokemonType } from "./pokemonType";
+import type { AllPokemonDataType, PokemonType } from "./pokemonType.js";
 
 //ポケモンカードコンポーネントのpropsの型定義
 //@param PokemonType: ポケモン1体分の詳細データ

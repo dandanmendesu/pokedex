@@ -1,9 +1,9 @@
-import {
+import type {
   HandlePageLoadButtonProps,
   IsAvailableProps,
   PageLoadButtonProps,
-} from "../../type/componentpropstype";
-import { loadPokemon, getAllPokemon } from "../../utils/pokemon";
+} from "../../type/componentpropstype.js";
+import { loadPokemon, getAllPokemon } from "../../utils/pokemon.js";
 import "./PageLoadButton.css";
 
 /*
