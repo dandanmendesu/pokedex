@@ -1,16 +1,39 @@
-# React + Vite
+# ポケモン図鑑
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 機能概要
 
-Currently, two official plugins are available:
+ポケモンのデータを取得する API「PokéAPI(https://pokeapi.co/)」を使用したポケモン図鑑です。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 工夫した点・学び
 
-## React Compiler
+### API からの情報取得
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+API からデータを fetch することで非同期処理の理解を深めた
 
-## Expanding the ESLint configuration
+### CSS によるスタイリング
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+CSS を用いることでデザインや簡単なアニメーションの設定方法を理解した
+
+### JSON ファイルの活用
+
+PokéAPI から返ってくるデータの中身は英語なので JSON ファイルに英名と日本語名を保存し、それを利用することで翻訳した
+日本語名で取得する API もあるようだが、JSON の勉強のため、この方法を採用
+
+### TypeScript の採用
+
+まずは、JavaScript で大枠を作り、その後に TypeScript に変えることでとっかかりの難易度を下げつつ、型安全を学んだ
+
+##　バージョン履歴
+
+### Version 1.0
+
+リリース
+
+### Version 1.1
+
+TypeScript に変えることで型安全を保障
+
+### Version 2.0
+
+翻訳機能を追加
+取得したデータを日本語に翻訳したうえで表示
